@@ -22,38 +22,7 @@
 <script>
 const SUPABASE_URL = 'https://ixmxsctanauvsdfhwhhe.supabase.co';
 const SUPABASE_ANON_KEY = 'sb_publishable_X7ZvZ0h6vf8rMM0avGnrUA_h1FHIvjL';
-const bank = [
-{ id:1,question:"¿Qué representa un evento en la aplicación de domicilios?",options:["Un pedido o cambio de estado registrado","Una copia mensual","Un informe semestral","Una tabla vacía"],correct:0,explanation:"Cada pedido o cambio puede representarse como evento."},
-{ id:2,question:"¿Cuál ejemplo corresponde a procesamiento por lotes?",options:["Procesar cada pedido al llegar","Analizar pedidos acumulados al final del día","Alertar inmediatamente","Actualizar el estado al instante"],correct:1,explanation:"Los lotes procesan datos acumulados."},
-{ id:3,question:"¿Qué caracteriza el procesamiento streaming?",options:["Analizar una hoja mensual","Analizar el semestre completo","Procesar eventos a medida que llegan","Imprimir un informe"],correct:2,explanation:"Streaming procesa eventos continuamente."},
-{ id:4,question:"¿Qué hace un productor de Kafka?",options:["Publica eventos en un tópico","Califica estudiantes","Diseña gráficos","Borra todos los datos"],correct:0,explanation:"El productor envía eventos a Kafka."},
-{ id:5,question:"¿Qué es un tópico de Kafka?",options:["Una presentación","Un flujo o categoría de eventos","Un archivo de Spark","Una nota"],correct:1,explanation:"Los eventos se organizan en tópicos."},
-{ id:6,question:"¿Qué hace un consumidor de Kafka?",options:["Solo genera eventos","Lee eventos de tópicos","Cambia hardware","Crea contraseñas"],correct:1,explanation:"Los consumidores leen eventos publicados."},
-{ id:7,question:"¿Para qué sirve Spark Structured Streaming?",options:["Editar imágenes","Transformar y analizar flujos de datos","Crear correos","Reemplazar la red"],correct:1,explanation:"Permite analizar datos en flujo."},
-{ id:8,question:"¿Cuál es el flujo correcto para analizar datos en tiempo real?",options:["Spark → pedido → Kafka","Evento → Kafka → Spark → resultado o alerta","Alerta → Excel → productor","Impresora → consumidor"],correct:1,explanation:"Kafka distribuye eventos y Spark los procesa."},
-{ id:9,question:"P001 está Entregado y registra 25 minutos. ¿Qué significa?",options:["Fue entregado y el tiempo registrado es 25 minutos","Tardó 25 horas","El dato es inválido","Aún no salió"],correct:0,explanation:"P001 figura entregado en 25 minutos."},
-{ id:10,question:"¿Qué pedidos cuentan como entregas completadas?",options:["Todos sin filtro","Solo los de estado Entregado","Solo los de tiempo cero","Solo los de zona Norte"],correct:1,explanation:"Se filtra por estado Entregado."},
-{ id:11,question:"¿Cuántos pedidos entregados hay en zona Norte?",options:["1","2","3","4"],correct:1,explanation:"P001 y P003: dos entregados en Norte."},
-{ id:12,question:"¿Cuántos pedidos entregados hay en zona Centro?",options:["0","1","2","3"],correct:1,explanation:"P005 es el único entregado en Centro."},
-{ id:13,question:"¿Cuántos pedidos entregados hay en zona Sur?",options:["0","1","2","4"],correct:1,explanation:"P004 es el único entregado en Sur."},
-{ id:14,question:"¿Cuántos pedidos entregados hay en total?",options:["2","3","4","6"],correct:2,explanation:"P001, P003, P004 y P005: cuatro."},
-{ id:15,question:"¿Qué pedido tiene el mayor tiempo de entrega?",options:["P001","P003","P004","P005"],correct:3,explanation:"P005 registra 50 minutos."},
-{ id:16,question:"Si se genera una alerta cuando el tiempo es mayor que 45 minutos, ¿qué pedido la activa?",options:["P001","P002","P004","P005"],correct:3,explanation:"P005 tiene 50 minutos, superior a 45."},
-{ id:17,question:"Un pedido En preparación tiene tiempo 0. ¿Qué interpretación es más prudente?",options:["Duró cero minutos","No hay tiempo final registrado aún","Debe contarse como entregado","Se perdió"],correct:1,explanation:"Un cero puede indicar que el tiempo final aún no está disponible."},
-{ id:18,question:"¿Qué filtro evita contar un pedido En camino como entregado?",options:["Estado igual a Entregado","Ordenar por código","Cambiar zona","Sumar todos los tiempos"],correct:0,explanation:"El estado separa pedidos completados de pedidos en curso."},
-{ id:19,question:"¿Cómo calcular entregas por zona?",options:["Agrupar por zona y contar los entregados","Ordenar sin contar","Sumar códigos","Contar solo pedidos en preparación"],correct:0,explanation:"Se filtran entregados, se agrupa por zona y se cuentan."},
-{ id:20,question:"¿Cómo identificar el mayor tiempo de entrega?",options:["Mínimo del código","Máximo del tiempo entre pedidos entregados","Contar zonas","Promediar códigos"],correct:1,explanation:"El máximo identifica la entrega más lenta."},
-{ id:21,question:"¿Para qué sirven las alertas en tiempo real?",options:["Detectar condiciones mientras llegan datos","Evitar registrar eventos","Eliminar el historial","Reemplazar la validación"],correct:0,explanation:"Las alertas facilitan una reacción oportuna."},
-{ id:22,question:"Si la regla es tiempo > 45, ¿un tiempo de 45 minutos activa la alerta?",options:["Sí","No, no es mayor que 45","Solo en Norte","Solo en preparación"],correct:1,explanation:"El operador > excluye el valor 45."},
-{ id:23,question:"Si la regla es tiempo >= 45, ¿un tiempo de 45 minutos activa la alerta?",options:["Sí","No","Solo en Centro","Nunca"],correct:0,explanation:"El operador >= incluye el valor 45."},
-{ id:24,question:"¿Por qué separar Kafka y Spark en una arquitectura de streaming?",options:["Kafka distribuye eventos y Spark los procesa","Siempre hacen lo mismo","Kafka elimina eventos","Spark solo diseña páginas"],correct:0,explanation:"Se separan ingesta y procesamiento."},
-{ id:25,question:"Si llegan cientos de eventos por minuto, ¿qué enfoque es apropiado?",options:["Procesarlos conforme llegan y escalar recursos según necesidad","Ignorarlos hasta fin de semestre","Marcar todos como entregados","Desactivar consumidores"],correct:0,explanation:"Streaming atiende flujos continuos."},
-{ id:26,question:"¿Qué datos usar para calcular un promedio válido del tiempo de entrega?",options:["Tiempos finales de pedidos entregados","Solo zonas","Solo códigos","Tiempos cero de pedidos abiertos"],correct:0,explanation:"El promedio debe usar tiempos finales comparables."},
-{ id:27,question:"¿Qué riesgo hay al incluir no entregados con tiempo 0 en el promedio?",options:["Puede reducir artificialmente el promedio","Siempre lo aumenta","No cambia nada","Duplica eventos"],correct:0,explanation:"Los ceros no finales sesgan el promedio hacia abajo."},
-{ id:28,question:"¿Qué función cumple el estado del pedido?",options:["Permite filtrar y elegir métricas válidas","Solo decora","Reemplaza el tiempo","No sirve"],correct:0,explanation:"El estado da contexto al análisis."},
-{ id:29,question:"¿Cuál es una salida útil del análisis de pedidos?",options:["Conteo por zona, mayor tiempo y alerta","Lista de contraseñas","Dibujo sin datos","Código sin resultados"],correct:0,explanation:"Son resultados concretos del caso."},
-{ id:30,question:"¿Qué debería ocurrir si Spark detecta una entrega de 50 minutos y la regla alerta por encima de 45?",options:["Actualizar métricas y activar una alerta","Descartarla siempre","Cambiarla a preparación","Kafka borra el tópico"],correct:0,explanation:"La regla actualiza métricas y activa la alerta al superar 45 minutos."}
-];
+// Las preguntas se cargan desde Supabase; no se exponen respuestas correctas en el navegador.
 const $=id=>document.getElementById(id), shuffle=a=>{const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]];}return b;};
 let selected=[],attemptId=null;
 function backendReady(){return Boolean(SUPABASE_URL&&SUPABASE_ANON_KEY);}
