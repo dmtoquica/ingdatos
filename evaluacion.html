@@ -15,13 +15,13 @@
 <label class="field" for="surnames">Apellidos</label><input type="text" id="surnames" autocomplete="family-name">
 <label class="field" for="code">Código estudiantil</label><input type="text" id="code" autocomplete="off">
 <p id="err" class="error" role="alert"></p><button id="start">Iniciar evaluación</button>
-<p class="muted" style="font-size:.9rem">La evaluación solo estará conectada cuando se configure el proyecto Supabase específico del curso.</p></section>
+<p class="muted" style="font-size:.9rem">La evaluación valida tu código y apellidos, selecciona 10 preguntas al azar y registra la calificación en el sistema.</p></section>
 <section class="card hidden" id="quiz"><div class="topline"><h2>Responde las preguntas</h2><span class="pill" id="count">0 de 10</span></div><form id="form"><div id="qs"></div><p id="submitErr" class="error" role="alert"></p><button id="submit">Entregar evaluación</button></form></section>
 <section class="card hidden" id="result"><h2>Resultado</h2><div class="score" id="score"></div><p id="summary"></p><div id="review"></div><button onclick="print()">Imprimir / Guardar PDF</button></section>
 </main><footer>Ingeniería de Datos · Evaluación académica</footer>
 <script>
-const SUPABASE_URL = ''; // completar cuando exista el proyecto exclusivo de Ingeniería de Datos
-const SUPABASE_ANON_KEY = ''; // clave publishable/anon del proyecto exclusivo
+const SUPABASE_URL = 'https://ixmxsctanauvsdfhwhhe.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_X7ZvZ0h6vf8rMM0avGnrUA_h1FHIvjL';
 const bank = [
 { id:1,question:"¿Qué representa un evento en la aplicación de domicilios?",options:["Un pedido o cambio de estado registrado","Una copia mensual","Un informe semestral","Una tabla vacía"],correct:0,explanation:"Cada pedido o cambio puede representarse como evento."},
 { id:2,question:"¿Cuál ejemplo corresponde a procesamiento por lotes?",options:["Procesar cada pedido al llegar","Analizar pedidos acumulados al final del día","Alertar inmediatamente","Actualizar el estado al instante"],correct:1,explanation:"Los lotes procesan datos acumulados."},
